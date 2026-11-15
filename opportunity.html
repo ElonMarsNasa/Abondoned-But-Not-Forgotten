@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Opportunity: Abandoned but not Forgotten</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<link rel="stylesheet" href="opportunity.css">
+<link rel="stylesheet" href="mission-home.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFEBB5"/><stop offset="1" stop-color="#F0B450"/></linearGradient>
+<linearGradient id="pan" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6E76F0"/><stop offset="1" stop-color="#2E2A7A"/></linearGradient></defs>
+<symbol id="rover" viewBox="0 0 160 100"><path d="M32 80 L60 58 L80 82 M128 80 L100 58" stroke="#C9CCE8" stroke-width="5" fill="none"/><circle cx="32" cy="80" r="13" fill="#2A2D4A" stroke="#C9CCE8" stroke-width="4"/><circle cx="80" cy="82" r="13" fill="#2A2D4A" stroke="#C9CCE8" stroke-width="4"/><circle cx="128" cy="80" r="13" fill="#2A2D4A" stroke="#C9CCE8" stroke-width="4"/><circle cx="32" cy="80" r="4" fill="#C9CCE8"/><circle cx="80" cy="82" r="4" fill="#C9CCE8"/><circle cx="128" cy="80" r="4" fill="#C9CCE8"/><rect x="30" y="38" width="100" height="26" rx="9" fill="url(#gold)"/><rect x="22" y="30" width="116" height="10" rx="4" fill="url(#pan)" stroke="#C9CCE8" stroke-width="2"/><rect x="41" y="14" width="3" height="17" fill="#E7E9FF"/><ellipse cx="42" cy="12" rx="12" ry="5" fill="#FFC857"/><rect x="112" y="8" width="5" height="23" fill="#E7E9FF"/><rect x="103" y="2" width="23" height="12" rx="4" fill="#E7E9FF"/><circle cx="110" cy="8" r="3.4" fill="#14123A"/><circle cx="120" cy="8" r="3.4" fill="#14123A"/><circle cx="111" cy="7" r="1" fill="#fff"/><circle cx="121" cy="7" r="1" fill="#fff"/><path d="M130 52 L146 60 L152 70" stroke="#E7E9FF" stroke-width="5" stroke-linecap="round" fill="none"/><circle cx="153" cy="72" r="5" fill="#FF7A45"/></symbol>
+<symbol id="curio" viewBox="0 0 160 100"><path d="M30 80L58 60L82 82M130 80L104 60" stroke="#B8C2D6" stroke-width="5" fill="none"/><circle cx="30" cy="80" r="13" fill="#2A2D4A" stroke="#B8C2D6" stroke-width="4"/><circle cx="80" cy="82" r="13" fill="#2A2D4A" stroke="#B8C2D6" stroke-width="4"/><circle cx="130" cy="80" r="13" fill="#2A2D4A" stroke="#B8C2D6" stroke-width="4"/><rect x="34" y="36" width="92" height="26" rx="6" fill="#C8D3E2"/><rect x="30" y="28" width="100" height="10" rx="3" fill="#9AA8BF"/><rect x="4" y="34" width="30" height="16" rx="3" fill="#6B7A99"/><path d="M9 34v16M15 34v16M21 34v16M27 34v16" stroke="#3F4A66" stroke-width="2"/><rect x="109" y="8" width="6" height="22" fill="#E7E9FF"/><rect x="99" y="0" width="26" height="12" rx="3" fill="#E7E9FF"/><circle cx="108" cy="6" r="3.5" fill="#14123A"/><circle cx="118" cy="6" r="2.4" fill="#FF9A3D"/><path d="M126 50L146 56L152 66" stroke="#E7E9FF" stroke-width="5" stroke-linecap="round" fill="none"/><circle cx="153" cy="68" r="8" fill="#FF9A3D"/></symbol>
+<symbol id="perse" viewBox="0 0 160 100"><path d="M30 80L58 62L82 83M130 80L104 62" stroke="#fff" stroke-width="5" fill="none"/><circle cx="30" cy="80" r="15" fill="#2A2D4A" stroke="#fff" stroke-width="4"/><circle cx="80" cy="83" r="15" fill="#2A2D4A" stroke="#fff" stroke-width="4"/><circle cx="130" cy="80" r="15" fill="#2A2D4A" stroke="#fff" stroke-width="4"/><rect x="28" y="34" width="104" height="30" rx="8" fill="#fff"/><rect x="28" y="50" width="104" height="6" fill="#FF5A4D"/><rect x="24" y="26" width="112" height="9" rx="3" fill="#E1E5F2"/><rect x="112" y="8" width="5" height="20" fill="#F2F4FF"/><rect x="100" y="0" width="29" height="12" rx="3" fill="#F2F4FF"/><circle cx="108" cy="6" r="3" fill="#14123A"/><circle cx="121" cy="6" r="3" fill="#14123A"/><path d="M132 48L150 52L154 64" stroke="#fff" stroke-width="6" stroke-linecap="round" fill="none"/><circle cx="155" cy="67" r="6" fill="#FF5A4D"/></symbol>
+<symbol id="flask" viewBox="0 0 24 24"><path d="M9 2h6v2h-1v5l5 9a2 2 0 0 1-1.8 3H6.8A2 2 0 0 1 5 18l5-9V4H9z" fill="#fff"/><path d="M8 15h8l2.2 4H5.8z" fill="#8FE3F5"/></symbol></svg>
+<div id="stars" aria-hidden="true"></div><div id="shoot"></div><div id="ground"></div><div id="dust"></div><canvas id="fx"></canvas><div id="flash"></div>
+<div id="hud"><button id="back" class="hide" aria-label="Go back one page"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Back</button><b>MISSION</b><div id="trk"><div id="fill"></div><svg id="hr" viewBox="0 0 160 100" height="24" aria-hidden="true"><use href="#rover" width="160" height="100"/></svg></div><a class="mission-home" href="index.html" aria-label="Home — Cosmic Journey"><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5v10a.5.5 0 0 1-.5.5H15v-7H9v7H3.5a.5.5 0 0 1-.5-.5Z" fill="currentColor"/></svg><span>Home</span></a></div>
+<main>
+
+<section class="screen center on" id="start">
+<div class="eyebrow">A Mars rover story</div>
+<h1 class="grad">OPPORTUNITY</h1>
+<p class="big">NASA planned about 3 months. She explored for more than 14 years!</p>
+<div class="scene"><svg preserveAspectRatio="xMidYMid slice" viewBox="0 0 440 200" role="img" aria-label="Cartoon Mars landscape with a rover"><defs><linearGradient id="hs" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#120B3A"/><stop offset=".6" stop-color="#5B2A86"/><stop offset="1" stop-color="#FF8A5C"/></linearGradient></defs><rect width="440" height="200" fill="url(#hs)"/><circle cx="340" cy="62" r="28" fill="#FFE7A8"/><circle cx="332" cy="55" r="5" fill="#F5CF86"/><circle cx="350" cy="72" r="7" fill="#F5CF86"/><circle cx="60" cy="30" r="2" fill="#fff"/><circle cx="130" cy="55" r="1.6" fill="#fff"/><circle cx="220" cy="22" r="2" fill="#fff"/><circle cx="410" cy="26" r="1.6" fill="#fff"/><path d="M0 150 L60 110 L110 140 L170 100 L240 145 L300 120 L360 150 L440 115 V200 H0Z" fill="#7A2B4F"/><path d="M0 172 Q110 150 220 166 T440 160 V200 H0Z" fill="#C1440E"/><g class="bob"><use href="#rover" x="145" y="100" width="150" height="94"/></g></svg></div>
+<p>Press start and travel through the story of a robot that never gave up.</p>
+<div class="row"><button class="btn" data-go="l1">START MISSION</button></div>
+</section>
+
+<section class="screen" id="l1">
+<div class="eyebrow">Level 1 · A name from a kid</div>
+<h2>A girl looked at the stars</h2>
+<div class="scene"><svg viewBox="0 0 440 200" role="img" aria-label="A girl on a hill looks up at the night sky and a red Mars"><defs><linearGradient id="ns" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0A0830"/><stop offset="1" stop-color="#4B2A86"/></linearGradient><radialGradient id="mg"><stop offset="0" stop-color="#FF7A45" stop-opacity=".6"/><stop offset="1" stop-color="#FF7A45" stop-opacity="0"/></radialGradient></defs><rect width="440" height="200" fill="url(#ns)"/><g fill="#fff"><circle cx="40" cy="30" r="1.6"/><circle cx="90" cy="70" r="1.2"/><circle cx="150" cy="25" r="2"/><circle cx="210" cy="60" r="1.4"/><circle cx="260" cy="20" r="1.8"/><circle cx="395" cy="40" r="1.6"/><circle cx="420" cy="90" r="1.2"/><circle cx="120" cy="110" r="1.3"/><circle cx="300" cy="105" r="1.5"/></g><circle cx="330" cy="70" r="46" fill="url(#mg)"/><circle cx="330" cy="70" r="22" fill="#D9573A"/><circle cx="322" cy="64" r="4" fill="#B8432A"/><circle cx="338" cy="78" r="5" fill="#B8432A"/><path d="M180 20L230 50" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".8"/><path d="M0 200V160Q80 140 160 168T300 175V200Z" fill="#0B0A20"/><circle cx="88" cy="134" r="8" fill="#F5C9A0"/><path d="M79 133q9-16 18 0q-4-5-9-5q-5 0-9 5z" fill="#2B1810"/><path d="M80 142q8-4 16 0l4 26H76z" fill="#FF8FB8"/><path d="M96 146L132 112" stroke="#F5C9A0" stroke-width="5" stroke-linecap="round"/></svg></div>
+<span class="tag g">Sofi Collis, age 9, from Arizona</span><span class="tag v">Nearly 10,000 essays in the contest</span><span class="tag o">Her names: Spirit and Opportunity</span>
+<p>In 2003, NASA and the LEGO company held a contest to name two Mars rovers. In her essay, Sofi wrote that the sparkly night sky made her feel better and made her dream she could fly there. Her winning words became the names of two robots.</p>
+<div class="card"><b>Who is Opportunity?</b><br>A robot geologist on Mars, about the size of a golf cart, with six wheels, solar panels and cameras for eyes. She launched on July 7, 2003 (Pacific time) and landed on January 25, 2004 (UTC; January 24 in California), bouncing in airbags into Eagle Crater at Meridiani Planum. Her twin, Spirit, explored the other side of Mars.</div>
+<div class="sci"><div class="lb"><svg width="18" height="18" aria-hidden="true"><use href="#flask" width="18" height="18"/></svg>SCIENCE</div>Orbiters had spotted a mineral called hematite on Meridiani Planum. On Earth it often forms near water, so NASA sent her there to ask: was Mars once wet?</div>
+<div class="row"><button class="btn" data-go="parts">Look inside Opportunity</button></div>
+</section>
+
+<section class="screen" id="parts">
+<div class="eyebrow">Look inside</div>
+<h2>Meet my body parts</h2>
+<p>Drag to spin her around. Tap a name (or the part itself) and it lights up!</p>
+<div id="r3"><canvas id="cv3" aria-label="3D model of the Opportunity rover"></canvas><small>Drag to rotate · tap a part</small></div>
+<div id="pb"></div>
+<div class="card" id="pinfo" aria-live="polite">Tap a name to light up that part of me.</div>
+<div class="row"><button class="btn" data-go="l2">Follow the long road</button></div>
+</section>
+
+<section class="screen" id="l2">
+<div class="eyebrow">Level 2 · The long road</div>
+<h2>Hard roads are okay</h2>
+<p>Opportunity faced many hard times. Tap each stop to see how she kept going.</p>
+<div class="card stop"><button class="sh" aria-expanded="false"><span class="n">1</span><span class="t">She explored for over 14 years</span><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="sb">
+<div class="scene"><svg viewBox="0 0 440 150" role="img" aria-label="Rover on a long dotted road between a near flag and a far flag"><rect width="440" height="150" fill="#2A1F6B"/><circle cx="30" cy="20" r="2" fill="#fff"/><circle cx="150" cy="30" r="2" fill="#fff"/><circle cx="300" cy="18" r="2" fill="#fff"/><circle cx="410" cy="34" r="2" fill="#fff"/><path d="M0 128 Q110 112 220 126 T440 122 V150 H0Z" fill="#C1440E"/><path d="M40 130 H400" stroke="#FFF6E5" stroke-width="4" stroke-dasharray="1 10" stroke-linecap="round"/><path d="M70 130V90" stroke="#fff" stroke-width="3"/><polygon points="70,90 98,100 70,110" fill="#FFC857"/><path d="M400 130V58" stroke="#fff" stroke-width="3"/><polygon points="400,58 428,70 400,82" fill="#FF8FB8"/><use href="#rover" x="195" y="66" width="100" height="63"/></svg></div>
+<span class="tag g">NASA's plan: about 3 months</span><span class="tag v">What happened: over 14 years exploring</span>
+<p>Her planned mission was 90 sols. She was still exploring more than 14 Earth years after landing. Recovery efforts continued until February 2019.</p>
+<div class="sci"><div class="lb"><svg width="18" height="18" aria-hidden="true"><use href="#flask" width="18" height="18"/></svg>SCIENCE</div>NASA counts time on Mars in sols. One sol is one Mars day, about 24 hours 40 minutes. NASA planned 90 sols (about 3 months) and she worked for 5,111 sols. Wind gusts and dust devils sometimes blew dust off her solar panels, which helped a lot.</div></div></div>
+<div class="card stop"><button class="sh" aria-expanded="false"><span class="n">2</span><span class="t">She drove 45.16 km</span><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="sb">
+<div class="scene"><svg viewBox="0 0 440 150" role="img" aria-label="Winding route from a small crater to a big crater"><rect width="440" height="150" fill="#B8532B"/><circle cx="90" cy="40" r="22" fill="#A24523"/><circle cx="330" cy="120" r="16" fill="#A24523"/><circle cx="30" cy="112" r="11" fill="#8E3A1A" stroke="#FFF6E5" stroke-width="3"/><circle cx="405" cy="40" r="30" fill="#8E3A1A" stroke="#FFF6E5" stroke-width="3"/><path d="M30 112 C110 30 170 150 250 80 S380 70 405 40" stroke="#FFF6E5" stroke-width="4" stroke-dasharray="2 9" stroke-linecap="round" fill="none"/><use href="#rover" x="170" y="40" width="64" height="40"/></svg></div>
+<span class="tag g">Start: Eagle Crater</span><span class="tag v">Finish: Perseverance Valley, Endeavour’s rim</span><br><span class="tag o">About 113 laps of a 400 m school track</span><span class="tag p">Past a marathon distance in March 2015</span>
+<div class="sci"><div class="lb"><svg width="18" height="18" aria-hidden="true"><use href="#flask" width="18" height="18"/></svg>SCIENCE</div>At Endeavour she found clay minerals, evidence of less acidic ancient water. On the way she also found Heat Shield Rock, an iron-nickel meteorite, in 2005.</div></div></div>
+<div class="card stop"><button class="sh" aria-expanded="false"><span class="n">3</span><span class="t">She survived Martian winters</span><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="sb">
+<div class="scene"><svg viewBox="0 0 440 170" role="img" aria-label="Frosty Mars winter: pale low sun, snow-like frost, a rover parked on a slope facing the sun and a thermometer showing freezing cold"><defs><linearGradient id="wk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0F1E4A"/><stop offset=".55" stop-color="#6F93CF"/><stop offset="1" stop-color="#E4EEFF"/></linearGradient><linearGradient id="wg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E9DDE6"/><stop offset="1" stop-color="#B9A3B8"/></linearGradient></defs><rect width="440" height="170" fill="url(#wk)"/><circle cx="372" cy="104" r="17" fill="#F7FAFF"/><circle cx="372" cy="104" r="30" fill="#fff" opacity=".18"/><path d="M0 108L70 84L130 104L210 80L290 106L360 88L440 108V170H0Z" fill="#9FB3DA"/><path d="M0 120L440 150V170H0Z" fill="url(#wg)"/><path d="M0 120L440 150" stroke="#fff" stroke-width="3" opacity=".8"/><ellipse cx="60" cy="146" rx="42" ry="6" fill="#fff" opacity=".8"/><ellipse cx="300" cy="158" rx="55" ry="6" fill="#fff" opacity=".8"/><ellipse cx="245" cy="143" rx="62" ry="5" fill="#3D3A6B" opacity=".35"/><g transform="rotate(7 160 100)"><use href="#rover" x="100" y="58" width="120" height="75"/></g><g fill="#fff"><circle class="sn" cx="30" cy="10" r="2.5"/><circle class="sn" cx="95" cy="-30" r="2" style="animation-delay:1.2s"/><circle class="sn" cx="160" cy="0" r="3" style="animation-delay:2.4s"/><circle class="sn" cx="230" cy="-20" r="2.2" style="animation-delay:.6s"/><circle class="sn" cx="300" cy="5" r="2.8" style="animation-delay:3.1s"/><circle class="sn" cx="350" cy="-15" r="2" style="animation-delay:1.8s"/><circle class="sn" cx="410" cy="8" r="2.6" style="animation-delay:2.9s"/></g><rect x="16" y="14" width="14" height="52" rx="7" fill="#fff"/><circle cx="23" cy="72" r="11" fill="#fff"/><rect x="20" y="52" width="6" height="14" fill="#5BC0FF"/><circle cx="23" cy="72" r="7.5" fill="#5BC0FF"/></svg></div>
+<span class="tag g">Parked on a slope that faces the sun</span><span class="tag v">Frost and freezing nights</span>
+<p>Winter nights on Mars are far colder than a freezer, and the sunlight gets weak. Her team on Earth kept solving problems for her.</p>
+<div class="sci"><div class="lb"><svg width="18" height="18" aria-hidden="true"><use href="#flask" width="18" height="18"/></svg>SCIENCE</div>Engineers used sun-facing slopes to improve winter power. A right-front wheel sometimes drew extra electrical current, so driving backward helped reduce wear. The team also adapted her operations when her flash memory failed.</div><p><b>A careful escape:</b> In April 2005 she became stuck at Purgatory Dune. After sandbox tests on Earth and weeks of careful driving, her team freed her. She also survived a major dust storm in 2007 by reducing activity.</p></div></div>
+
+<p class="center" id="l2hint">Open all 3 stops to unlock the next page (0/3)</p>
+<div class="row"><button class="btn" id="l2next" data-go="water" disabled>Continue</button></div>
+</section>
+
+<section class="screen" id="water">
+<div class="eyebrow">Science stop · Was Mars wet?</div>
+<h2>Imagine Mars with water</h2>
+<p>Opportunity found clues that liquid water once covered places on Mars. Travel back in time and see how scientists imagine it.</p>
+<div class="row"><button class="btn ghost sel" id="tdry">Mars today</button><button class="btn ghost" id="tago">Long ago</button></div>
+<div class="scene"><svg id="wsc" viewBox="0 0 440 210" role="img" aria-label="Artist-style picture: Mars today is dry; long ago it may have had shallow water"><defs><linearGradient id="dsk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C77A55"/><stop offset="1" stop-color="#F3C08C"/></linearGradient><linearGradient id="wsk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5BB4F0"/><stop offset="1" stop-color="#BFE8FF"/></linearGradient><linearGradient id="wtr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3FA6E8"/><stop offset="1" stop-color="#1F5FB8"/></linearGradient></defs>
+<rect width="440" height="210" fill="url(#dsk)"/><rect class="wet" width="440" height="210" fill="url(#wsk)"/><circle cx="360" cy="48" r="24" fill="#FFE7A8" opacity=".85"/>
+<ellipse class="wet" cx="90" cy="40" rx="44" ry="13" fill="#fff"/><ellipse class="wet" cx="130" cy="34" rx="28" ry="12" fill="#fff"/><ellipse class="wet" cx="270" cy="62" rx="50" ry="13" fill="#fff"/>
+<path d="M0 130 L60 98 L120 125 L190 92 L260 128 L330 100 L440 130 V210 H0Z" fill="#9A4A2B"/><path d="M0 150 Q110 132 220 148 T440 144 V210 H0Z" fill="#B65A32"/>
+<path class="wet" d="M0 158 Q110 142 220 156 T440 152 V210 H0Z" fill="url(#wtr)"/><path class="wet" d="M30 176 q14 -8 28 0 t28 0 M190 190 q14 -8 28 0 t28 0 M310 170 q14 -8 28 0 t28 0" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
+<g class="dry"><use href="#rover" x="40" y="104" width="110" height="69"/></g></svg></div>
+<p class="center" id="wcap" aria-live="polite">Mars today: cold, dry and dusty.</p>
+<h2>Real clues from Opportunity's cameras</h2>
+<div class="clues">
+<div class="card clue"><div class="ph"><img src="https://www.nasa.gov/wp-content/uploads/2023/03/pia19113_1mp084iof013ort000p2956l257f1_post.jpg" alt="Real close-up photo of small round Martian blueberries" loading="lazy" data-page="https://www.nasa.gov/image-article/martian-concretions-near-fram-crater/"></div><b>Blueberries up close</b><br>This image covers an area 3 cm across—not the width of each tiny ball. These hematite-rich mineral concretions formed through groundwater activity.</div>
+<div class="card clue"><div class="ph"><img src="https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia05/pia05634/PIA05634.jpg?crop=faces%2Cfocalpoint&amp;fit=clip&amp;h=512&amp;w=768" alt="Real photo of the rock called Berry Bowl with blueberries in it" loading="lazy" data-page="https://science.nasa.gov/photojournal/discovery-served-up-in-a-bowl/"></div><b>The Berry Bowl rock</b><br>The spheres occur within the rock as well as loose on the ground. Studying their mineral composition helped scientists test how water changed these rocks.</div>
+<div class="card clue"><div class="ph"><img src="https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia05/pia05588/PIA05588.jpg?crop=faces%2Cfocalpoint&amp;fit=clip&amp;h=1024&amp;w=1024" alt="Real photo of grey blueberries scattered on the Martian plains" loading="lazy" data-page="https://science.nasa.gov/photojournal/berries-here-there-everywhere/"></div><b>Blueberries everywhere</b><br>Similar spheres lie scattered across the plains. Comparing these deposits helped scientists investigate the region’s watery past.</div>
+</div>
+<div class="sci"><div class="lb"><svg width="18" height="18" aria-hidden="true"><use href="#flask" width="18" height="18"/></svg>MORE CLUES</div>Ripple-shaped layers and sulfate minerals add to the evidence for ancient water. Near Endeavour Crater, the bright Homestake vein contained gypsum: a mineral deposited as water moved through cracks. Clay minerals pointed to a less acidic watery environment.</div>
+<div class="sci"><div class="lb">A PLACE FOR LIFE?</div>These clues suggest that some ancient environments could have supported microbes. Opportunity found evidence of past water and potentially habitable conditions; she did not discover life.</div>
+
+<div class="row"><button class="btn" data-go="l3">Continue the road</button></div>
+</section>
+
+<section class="screen" id="l3">
+<div class="eyebrow">Level 3 · The great dust storm</div>
+<h2>The sky went dark</h2>
+<div class="scene"><svg viewBox="0 0 440 150" role="img" aria-label="Dust storm around a quiet rover that gets no signal"><defs><linearGradient id="ds" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A1C14"/><stop offset="1" stop-color="#7A3A1E"/></linearGradient></defs><rect width="440" height="150" fill="url(#ds)"/><circle cx="370" cy="36" r="20" fill="#FFD9A0" opacity=".3"/><path class="dust" d="M-10 30 q50 -22 100 0 t100 0 t100 0 t100 0" stroke="#FFD9A0" stroke-opacity=".35" stroke-width="6" fill="none" stroke-linecap="round"/><path class="dust" d="M-10 62 q50 -22 100 0 t100 0 t100 0 t100 0" stroke="#FFD9A0" stroke-opacity=".3" stroke-width="5" fill="none" stroke-linecap="round" style="animation-duration:4s"/><path d="M0 128 Q110 112 220 126 T440 122 V150 H0Z" fill="#4A2418"/><g style="filter:grayscale(1) brightness(.85)"><use href="#rover" x="170" y="62" width="100" height="63"/></g><path class="pulse" d="M200 52 a28 28 0 0 1 40 0 M190 42 a42 42 0 0 1 60 0" stroke="#fff" stroke-width="3" fill="none" stroke-dasharray="4 5" stroke-linecap="round"/></svg></div>
+<span class="tag o">June 10, 2018: last contact</span><span class="tag">February 13, 2019: mission complete</span>
+<p class="big">In 2018, a planet-wide dust storm blocked the sunlight Opportunity needed for power. Her last signal arrived on June 10. NASA sent more than 1,000 commands during recovery efforts before ending the mission on February 13, 2019.</p>
+<div class="sci"><div class="lb"><svg width="18" height="18" aria-hidden="true"><use href="#flask" width="18" height="18"/></svg>SCIENCE</div>You may have seen the line "My battery is low and it's getting dark". It was a poetic paraphrase by a journalist, not a real transmission.</div>
+<div class="row"><button class="btn ghost" id="legacyBtn">But she was not forgotten...</button></div>
+<div class="card hide" id="legacy"><b>What Opportunity made possible</b>
+<div class="scene"><svg viewBox="0 0 440 150" role="img" aria-label="Three different rovers: Opportunity with solar panels, Curiosity with a tall mast, and Perseverance in white with a small helicopter"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2A1F6B"/><stop offset="1" stop-color="#8A3F7A"/></linearGradient></defs><rect width="440" height="150" fill="url(#lg)"/><path d="M0 126 Q110 112 220 124 T440 120 V150 H0Z" fill="#C1440E"/><path d="M122 92 h26 M272 92 h26" stroke="#FFC857" stroke-width="4" stroke-dasharray="4 5" stroke-linecap="round"/><use href="#rover" x="12" y="52" width="108" height="68"/><use href="#curio" x="150" y="40" width="124" height="78"/><use href="#perse" x="298" y="48" width="130" height="81"/><g transform="translate(386 14)"><rect x="-12" y="6" width="24" height="5" rx="2" fill="#fff"/><path d="M-22 2h44" stroke="#FFC857" stroke-width="3" stroke-linecap="round"/><path d="M-6 11v6M6 11v6" stroke="#fff" stroke-width="2"/></g></svg></div>
+<span class="tag g">Opportunity: solar panels</span><span class="tag v">Curiosity (2012): nuclear battery, tall mast</span><span class="tag p">Perseverance (2021): nuclear battery, helicopter friend</span>
+<p>She returned more than 217,000 images, including 15 full-color panoramas. Her water discoveries, navigation methods, and the experience of her team helped later Mars missions. Her exploration ended, but her data and discoveries live on.
+</p><p><b>A record-setting journey:</b> Opportunity’s 45.16 km drive set a record beyond Earth. NASA reports that Perseverance surpassed that total on October 11, 2026.</p>
+
+<div class="row"><button class="btn" data-go="done">Finish the mission</button></div></div>
+</section>
+
+<section class="screen center" id="done">
+<div class="eyebrow">Mission complete</div>
+<h1 class="grad">She was amazing!</h1>
+<p class="big">How do you feel about her story? Tap one!</p>
+<div class="row" id="emos"></div>
+<p id="emoMsg" class="big" aria-live="polite">&nbsp;</p>
+<div class="row"><button class="btn" data-go="quiz">Take the quiz</button></div>
+</section>
+
+<section class="screen" id="quiz">
+<div class="eyebrow" id="qn">Question 1 of 3</div>
+<h2 id="qt"></h2>
+<div id="qo"></div>
+<p id="qf" aria-live="polite"></p>
+<div class="row"><button class="btn hide" id="qnext">Next</button></div>
+</section>
+
+<section class="screen center" id="pick">
+<div class="eyebrow">Your turn</div>
+<h2>What do you like most about Opportunity?</h2>
+<p>Tap the picture you love most to get a mystery explorer card!</p>
+<div class="picks" id="picks"></div>
+</section>
+
+<section class="screen center" id="badge">
+<div class="eyebrow" id="bhead">Something is waiting for you...</div>
+<button class="seal" id="seal" aria-label="Tap to open your mystery card"><svg viewBox="0 0 200 200" aria-hidden="true"><defs><radialGradient id="orb" cx=".4" cy=".35"><stop offset="0" stop-color="#FFF6C8"/><stop offset=".45" stop-color="#FFB24A"/><stop offset="1" stop-color="#8B5CF6"/></radialGradient></defs><circle cx="100" cy="100" r="86" fill="url(#orb)" stroke="#fff" stroke-width="5"/><circle cx="100" cy="100" r="68" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="3 8" opacity=".8"/><text x="100" y="128" text-anchor="middle" font-family="Fredoka,sans-serif" font-weight="700" font-size="92" fill="#fff">?</text><path d="M30 40l3 8 8 3-8 3-3 8-3-8-8-3 8-3z M168 150l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" fill="#fff"/></svg>Tap to open!</button>
+<div id="cardBox" class="hide"><div class="rays"></div><div id="tilt"><div id="cardArt"></div><div class="holo"></div></div></div>
+<p class="big hide" id="bq"></p>
+<div class="card hide" id="ba" style="text-align:left"></div>
+<div class="row hide" id="bbtns"><button class="btn" id="share">Share my card</button><button class="btn ghost" data-go="pick">Pick another favorite</button><a class="btn ghost" id="again" href="index.html">Play again</a></div>
+<p id="shareMsg" aria-live="polite"></p>
+</section>
+
+</main>
+<script src="opportunity.js"></script>
+</body>
+</html>

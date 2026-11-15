@@ -1,0 +1,298 @@
+:root{--gold:#FFC857;--orange:#FF7A45;--violet:#8B7BFF;--pink:#FF8FB8;--text:#F6F1FF}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:Fredoka,"Trebuchet MS",system-ui,sans-serif;font-size:18px;line-height:1.55;color:var(--text);background:radial-gradient(1100px 700px at 85% -10%,#3B2A8F 0,transparent 60%),linear-gradient(#0B1026,#1B1245 70%,#2A1450);overflow-x:hidden}
+#dust{position:fixed;inset:0;background:radial-gradient(900px 600px at 50% 0,rgba(193,90,40,.45),rgba(30,10,10,.55));opacity:0;pointer-events:none;transition:opacity 1.6s;z-index:1}
+body.storm #dust{opacity:1}
+#stars i{position:fixed;border-radius:50%;background:#fff;animation:tw 3s infinite alternate;z-index:0}
+@keyframes tw{from{opacity:.15}to{opacity:1}}
+#shoot{position:fixed;top:12vh;left:-10vw;width:120px;height:2px;background:linear-gradient(90deg,transparent,#fff);transform:rotate(18deg);animation:sh 9s 3s infinite;z-index:0}
+@keyframes sh{0%{left:-15vw;opacity:0}3%{opacity:1}12%{left:70vw;top:42vh;opacity:0}100%{left:70vw;opacity:0}}
+#ground{position:fixed;left:-10vw;right:-10vw;bottom:-15vh;height:27vh;border-radius:50% 50% 0 0;background:linear-gradient(#FF7A45,#B83A1A);z-index:0;transition:filter 1.6s}
+body.storm #ground{filter:brightness(.4) saturate(.7)}
+#hud{position:fixed;top:0;left:0;right:0;height:54px;display:flex;align-items:center;gap:12px;padding:6px 14px 0;z-index:6;background:linear-gradient(rgba(11,16,38,.92),transparent)}
+#hud b{font-size:13px;letter-spacing:3px;color:var(--gold)}
+#back{display:flex;align-items:center;gap:4px;font:600 15px Fredoka,sans-serif;color:#fff;background:rgba(255,255,255,.14);border:1.5px solid rgba(255,255,255,.55);border-radius:12px;padding:6px 12px 6px 8px;cursor:pointer}
+#back:hover{background:rgba(255,255,255,.28)}
+#trk{position:relative;flex:1;height:8px;background:rgba(255,255,255,.16);border-radius:9px}
+#fill{height:100%;width:0;border-radius:9px;background:linear-gradient(90deg,#FFD66B,#FF7A45);transition:width .7s}
+#hr{position:absolute;top:-17px;width:38px;margin-left:-19px;left:0;transition:left .7s}
+#fx{position:fixed;inset:0;pointer-events:none;z-index:9}
+#flash{position:fixed;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:8}
+#flash.go{animation:fl .9s ease-out}@keyframes fl{0%{opacity:0}15%{opacity:.95}100%{opacity:0}}
+main{position:relative;z-index:2;max-width:800px;margin:0 auto;padding:64px 18px 16px}
+.screen{display:none}.screen.on{display:block}
+.screen.on>*{animation:up .6s both}
+.screen.on>*:nth-child(2){animation-delay:.07s}.screen.on>*:nth-child(3){animation-delay:.14s}.screen.on>*:nth-child(4){animation-delay:.21s}.screen.on>*:nth-child(5){animation-delay:.28s}.screen.on>*:nth-child(n+6){animation-delay:.35s}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.center{text-align:center}
+.eyebrow{font-weight:600;font-size:14px;letter-spacing:3px;color:var(--gold);text-transform:uppercase}
+h1{font-size:clamp(38px,9vw,70px);line-height:1.05;margin:6px 0 12px;font-weight:700}
+h2{font-size:clamp(26px,5.5vw,40px);line-height:1.15;margin:6px 0 12px;font-weight:700}
+.grad{background:linear-gradient(90deg,#FFD66B,#FF8FB8,#8B7BFF);-webkit-background-clip:text;background-clip:text;color:transparent}
+p{margin:0 0 14px}.big{font-size:clamp(19px,3.4vw,24px)}
+.card{background:rgba(255,255,255,.08);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.18);border-radius:24px;padding:16px 20px;margin:16px 0}
+.sci{background:rgba(76,195,217,.16);border:1px solid rgba(120,215,235,.55);border-radius:16px;padding:12px 16px;margin:12px 0 4px;font-size:16.5px;color:#EAF9FF}
+.sci .lb{display:flex;align-items:center;gap:8px;font-weight:700;letter-spacing:2px;font-size:13px;margin-bottom:4px;color:#8FE3F5}
+.btn{font:600 20px Fredoka,"Trebuchet MS",sans-serif;border:0;border-radius:999px;padding:14px 34px;color:#2A1200;background:linear-gradient(135deg,#FFD66B,#FF8A4C);box-shadow:0 8px 22px rgba(255,138,76,.4);cursor:pointer;transition:transform .15s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px) scale(1.04);box-shadow:0 12px 28px rgba(255,138,76,.55)}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none;background:rgba(255,255,255,.2);color:#fff}
+.btn.ghost{background:transparent;color:var(--text);border:2px solid rgba(255,255,255,.5);box-shadow:none}
+.btn.ghost.sel{background:linear-gradient(135deg,#FFD66B,#FF8A4C);color:#2A1200;border-color:transparent}
+button:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:18px 0}
+.tag{display:inline-block;padding:3px 4px;font-size:15px;font-weight:500;margin:2px 14px 2px 0;color:#F1E9FF}
+.tag::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px;background:#fff}
+.tag.g::before{background:var(--gold)}.tag.v::before{background:var(--violet)}.tag.o::before{background:var(--orange)}.tag.p::before{background:var(--pink)}
+.scene{border-radius:22px;overflow:hidden;border:1px solid rgba(255,255,255,.22);margin:12px 0;line-height:0;box-shadow:0 12px 30px rgba(0,0,0,.35)}
+.scene svg{width:100%;height:auto;display:block}
+.bob{animation:bob 3.5s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-6px)}}
+#r3{position:relative;height:350px;border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,.22);background:radial-gradient(circle at 50% 30%,#4A2E8E,#1A1245);margin:12px 0}
+#r3 canvas{width:100%;height:100%;display:block;touch-action:pan-y;cursor:grab}
+#r3 small{position:absolute;left:0;right:0;bottom:8px;text-align:center;font-size:13px;opacity:.8;pointer-events:none}
+#pb{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.pbtn{font:600 16px Fredoka,sans-serif;border:2px solid rgba(255,255,255,.55);background:rgba(255,255,255,.1);color:var(--text);border-radius:12px;padding:8px 14px;cursor:pointer;transition:all .2s}
+.pbtn:hover{background:rgba(255,255,255,.22)}
+.pbtn.on{background:linear-gradient(135deg,#FFD66B,#FF8A4C);color:#2A1200;border-color:transparent;box-shadow:0 0 18px rgba(255,200,87,.7)}
+#pinfo{min-height:92px}#pinfo b{color:var(--gold);font-size:20px}
+.stop{padding:0;overflow:hidden}
+.sh{display:flex;align-items:center;gap:12px;width:100%;text-align:left;font:inherit;color:inherit;background:none;border:0;padding:16px 20px;cursor:pointer;transition:background .2s}
+.sh:hover{background:rgba(255,255,255,.1)}
+.sh .n{flex:none;width:40px;height:40px;line-height:40px;text-align:center;border-radius:50%;border:2px solid var(--gold);color:var(--gold);font-weight:700}
+.sh .t{font-weight:700;font-size:22px;flex:1}
+.sh svg{flex:none;transition:transform .3s}.stop.open .sh svg{transform:rotate(180deg)}
+.sb{display:none;padding:0 20px 18px}.stop.open .sb{display:block;animation:up .5s}
+#wsc .wet,#wsc .dry{transition:opacity 1.3s}#wsc .wet{opacity:0}#wsc.ago .wet{opacity:1}#wsc.ago .dry{opacity:0}
+.clues{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:14px}
+.clue{padding:10px;font-size:16px;margin:0}.clue .ph{border-radius:14px;overflow:hidden;line-height:0;margin-bottom:8px;aspect-ratio:1/1;background:#2a2060;display:flex;align-items:center;justify-content:center}
+.clue .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.clue .miss{line-height:1.4;padding:14px;text-align:center;font-size:14px}.clue .miss a{color:#8FE3F5}
+.clue b{color:var(--gold);font-size:19px}.clue small{display:block;opacity:.75;font-size:12.5px;margin-top:4px}
+.emo{font:600 16px Fredoka,sans-serif;color:var(--text);background:rgba(255,255,255,.09);border:1.5px solid rgba(255,255,255,.4);border-radius:22px;cursor:pointer;transition:transform .2s,box-shadow .2s;padding:12px 16px 8px;width:112px}
+.emo svg{width:62px;height:62px;display:block;margin:0 auto 4px}
+.emo:hover,.tile:hover{transform:translateY(-4px) scale(1.04);box-shadow:0 10px 26px rgba(139,123,255,.5)}
+.emo.sel{background:rgba(255,200,87,.25);border-color:var(--gold);transform:scale(1.08)}
+.picks{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.tile{font:600 17px Fredoka,sans-serif;color:var(--text);text-align:left;background:rgba(255,255,255,.09);border:1.5px solid rgba(255,255,255,.4);border-radius:22px;padding:8px 8px 12px;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.tile .art{border-radius:16px;overflow:hidden;line-height:0;margin-bottom:8px}.tile .art svg{width:100%;height:auto;display:block}
+.tile span{display:block;padding:0 6px}
+.opt{display:block;width:100%;text-align:left;font:500 18px Fredoka,sans-serif;color:var(--text);background:rgba(255,255,255,.09);border:1.5px solid rgba(255,255,255,.4);border-radius:18px;padding:13px 18px;margin:10px 0;cursor:pointer}
+.opt:hover{background:rgba(255,255,255,.18)}.opt.good{background:#1F9D6B;border-color:#7CF0B8}.opt.bad{background:#B23A55;border-color:#FF9AB0}
+.locked .opt{pointer-events:none;cursor:default}.locked .opt:not(.good):not(.bad){opacity:.5}
+.seal{display:block;margin:10px auto;background:none;border:0;cursor:pointer;color:var(--text);font:600 20px Fredoka,sans-serif}
+.seal svg{width:230px;height:230px;display:block;margin:0 auto 6px;animation:orb 2.2s ease-in-out infinite;filter:drop-shadow(0 0 28px rgba(255,200,87,.8))}
+.seal.shake svg{animation:shk .12s linear infinite}
+@keyframes orb{50%{transform:scale(1.07) translateY(-6px)}}@keyframes shk{25%{transform:translateX(-7px) rotate(-3deg)}75%{transform:translateX(7px) rotate(3deg)}}
+#cardBox{position:relative;margin:10px auto;display:flex;justify-content:center;perspective:900px;overflow:visible;isolation:isolate}
+#cardBox .rays{--ray-size:min(110vmin,850px);position:absolute;inset:auto;left:50%;top:50%;width:var(--ray-size);height:var(--ray-size);margin:calc(var(--ray-size) / -2) 0 0 calc(var(--ray-size) / -2);z-index:-1;background:repeating-conic-gradient(from 0deg,rgba(255,226,122,.28) 0 6deg,transparent 6deg 18deg);-webkit-mask:radial-gradient(circle closest-side,#000 0%,rgba(0,0,0,.8) 30%,transparent 90%);mask:radial-gradient(circle closest-side,#000 0%,rgba(0,0,0,.8) 30%,transparent 90%);animation:spin 24s linear infinite;pointer-events:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+#tilt{position:relative;width:min(300px,80vw);border-radius:26px;animation:flip 1s cubic-bezier(.2,1.4,.4,1) both,sway 6s ease-in-out 1s infinite;transition:transform .15s;filter:drop-shadow(0 18px 34px rgba(0,0,0,.55)) drop-shadow(0 0 30px var(--glow,#FFC857))}
+@keyframes flip{from{transform:rotateY(100deg) scale(.4);opacity:0}to{transform:none;opacity:1}}
+@keyframes sway{50%{transform:rotateY(8deg) rotateX(-3deg)}}
+#tilt.moving{animation:none}
+#tilt svg{display:block;width:100%;height:auto;border-radius:26px}
+.holo{position:absolute;inset:0;border-radius:26px;pointer-events:none;mix-blend-mode:screen;opacity:.65;background:linear-gradient(115deg,transparent 18%,rgba(255,255,255,.7) 32%,rgba(255,130,200,.45) 42%,rgba(120,230,255,.45) 52%,rgba(255,240,150,.4) 60%,transparent 74%);background-size:260% 260%;background-position:var(--hx,0%) var(--hy,50%);animation:shine 4.5s ease-in-out infinite}
+@keyframes shine{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+#tilt.moving .holo{animation:none}
+.tw{animation:tw2 1.8s ease-in-out infinite}@keyframes tw2{50%{opacity:.15}}
+.dust{stroke-dasharray:30 18;animation:dr 3s linear infinite}@keyframes dr{to{stroke-dashoffset:-96}}
+.pulse{animation:tw2 2s ease-in-out infinite}
+.sn{animation:fall 5s linear infinite}@keyframes fall{from{transform:translateY(-12px)}to{transform:translateY(170px)}}
+.hide{display:none!important}.src{font-size:13px;opacity:.75;margin-top:26px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* Restore the original spacing for these story screens. */
+main:has(#start.on),main:has(#parts.on),main:has(#badge.on){padding:64px 18px 24px}
+
+/* Compact layouts for mission complete, quiz, and favorite selection. */
+#done h1{font-size:clamp(34px,7vw,58px)}
+#done .row,#quiz .row{margin:12px 0 0}
+#done #emos{gap:10px}
+#done #emoMsg{min-height:1.55em;margin:12px 0}
+#quiz{max-width:680px;margin:0 auto}
+#quiz h2{font-size:clamp(24px,4vw,34px)}
+#quiz .opt{padding:11px 16px;margin:8px 0}
+#quiz #qf{margin:12px 0 0;font-size:17px}
+#pick .picks{gap:10px}
+#pick .tile .art svg{max-height:19dvh}
+#pick .tile{font-size:16px}
+@media (max-width:679px){
+  #done .big{font-size:19px}
+  #done .emo{width:calc(50% - 6px);max-width:150px;padding:8px}
+  #done .emo svg{width:44px;height:44px}
+  #pick .picks{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #pick .tile .art svg{max-height:13dvh}
+  #pick .tile{font-size:14px}
+}
+@media (max-height:680px){
+  #done h1{font-size:38px;margin:4px 0 8px}
+  #done p{margin-bottom:8px}
+  #pick h2{font-size:28px}
+  #done .btn,#quiz .btn{font-size:18px;padding:10px 24px}
+}
+
+.src a{color:#8FE3F5}
+
+/* Viking story activities */
+body{--gold:#FFD786}
+main{max-width:900px}
+h1{font-size:clamp(36px,7vw,64px)}
+h3{font-size:23px;margin:10px 0}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.two .card{margin:0}
+.two .card p:last-child{margin-bottom:0}
+.scene{max-width:720px;margin:12px auto}
+#start .scene{max-width:600px}
+.orbit-half,.land-half{transition:transform 1.5s ease-in-out}
+.separated .orbit-half{transform:translate(-85px,-12px)}
+.separated .land-half{transform:translate(72px,38px)}
+.nasa-photo{background:#1D173E;min-height:180px}
+.nasa-photo img{width:100%;height:clamp(220px,38dvh,360px);object-fit:contain;display:block}
+.nasa-photo .miss{padding:50px 20px;line-height:1.5;text-align:center}
+.nasa-photo a,.src a{color:#8FE3F5}
+.reveal{padding:0;overflow:hidden}
+.reveal summary{padding:16px 20px;cursor:pointer;color:var(--gold);font-size:21px;font-weight:600}
+.reveal-body{padding:0 20px 16px;margin:0}
+.reveal .scene{margin:0 0 12px}
+.sample-scene{position:relative}
+.sample-dot{position:absolute;left:30%;top:74%;width:14px;height:14px;border-radius:50%;background:#FFC857;box-shadow:0 0 16px #FFC857;transition:left 1s,top 1s}
+.sample-scene[data-step="1"] .sample-dot{left:52%;top:50%}
+.sample-scene[data-step="2"] .sample-dot{left:68%;top:59%;background:#8FE3F5}
+.sample-steps{display:flex;gap:20px;justify-content:center;padding:0;list-style-position:inside;font-size:15px}
+.sample-steps li{opacity:.5}.sample-steps li.active{opacity:1;color:var(--gold)}
+.timelines{text-align:left}
+#done .emo{width:100px;padding:8px}
+#done .emo svg{width:46px;height:46px}
+#cardBox{overflow:visible;isolation:isolate;padding:15px 0}
+#cardBox .rays{--ray-size:min(110vmin,850px);position:absolute;inset:auto;left:50%;top:50%;width:var(--ray-size);height:var(--ray-size);margin:calc(var(--ray-size) / -2) 0 0 calc(var(--ray-size) / -2);z-index:-1;background:repeating-conic-gradient(from 0deg,rgba(255,226,122,.28) 0 6deg,transparent 6deg 18deg);-webkit-mask:radial-gradient(circle closest-side,#000 0%,rgba(0,0,0,.8) 30%,transparent 90%);mask:radial-gradient(circle closest-side,#000 0%,rgba(0,0,0,.8) 30%,transparent 90%);animation:spin 24s linear infinite;pointer-events:none}
+#shareMsg:empty{display:none}
+#shareMsg{font-size:15px}
+button,a,summary{touch-action:manipulation}
+.tile.chosen{border-color:var(--gold);background:rgba(255,200,87,.2)}
+summary:focus-visible,a:focus-visible{outline:3px solid white;outline-offset:3px}
+@media(min-width:720px){
+  #parts.on{display:grid;grid-template-columns:minmax(0,1fr) 300px;grid-template-areas:"title title" "modes modes" "viewer controls" "viewer info" "next next";grid-template-rows:auto auto auto 1fr auto;gap:12px 20px;align-items:start}
+  #parts>h2{grid-area:title;margin:6px 0 0}
+  #parts>.segmented{grid-area:modes;margin:0 0 4px}
+  #parts #r3{grid-area:viewer;margin:0;height:clamp(220px,43dvh,340px)}
+  #parts #pb{grid-area:controls;margin:0;align-content:start}
+  #parts #pinfo{grid-area:info;margin:0;align-self:start}
+  #parts>.row:not(.segmented){grid-area:next;margin:4px 0 0}
+}
+@media(max-width:600px){.two{grid-template-columns:1fr}.sample-steps{gap:8px;font-size:12px}.reveal summary{font-size:19px}#done .emo{width:calc(50% - 6px);max-width:140px}#r3{height:270px}}
+@media(prefers-reduced-motion:reduce){.sample-dot,.orbit-half,.land-half{transition:none}}
+
+/* Shared first-page dimensions: Viking, Opportunity, and Spirit. */
+main:has(#start.on){max-width:900px;padding:64px 18px 24px}
+#start.on{display:block}
+#start h1{font-size:clamp(36px,7vw,64px);line-height:1.05;margin:6px 0 12px}
+#start p{margin:0 0 14px}
+#start .big{font-size:clamp(19px,3.4vw,24px)}
+#start .scene{width:100%;max-width:600px;aspect-ratio:44/21;margin:12px auto}
+#start .scene svg{width:100%;height:100%;display:block}
+#start .row{margin:18px 0;padding:0}
+@media(max-height:600px){
+  main:has(#start.on){padding-top:58px;padding-bottom:12px}
+  #start h1{font-size:clamp(30px,6vw,44px);margin:4px 0 8px}
+  #start .big{font-size:18px;line-height:1.35}
+  #start>p:not(.big){font-size:16px;line-height:1.35}
+  #start .scene{max-width:min(600px,max(110px,calc((100svh - 320px)*44/21)))}
+  #start .row{margin:12px 0}
+  #start .btn{font-size:18px;padding:10px 26px}
+}
+
+/* Lander story interactions */
+ main:has(#parts.on){max-width:1120px}
+ #parts>.row:last-child{margin:18px 0}
+ .stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:20px 0}.stats .card{margin:0}.stats b{display:block;font-size:clamp(24px,4vw,38px);color:var(--gold)}.stats span{display:block;font-size:17px}
+ #digCover{transition:opacity .7s}.dig-stage-1 #digCover{opacity:.65}.dig-stage-2 #digCover{opacity:.3}.dig-stage-3 #digCover{opacity:0}
+ #icePieces{transition:opacity .8s}.ice-later #icePieces{opacity:0}
+ #ovenWindow{transition:fill .7s}.oven-hot #ovenWindow{fill:#FF9A45}
+ #seasonOverlay{opacity:0;transition:opacity .8s}.cold-season #seasonOverlay,.dusty #seasonOverlay{opacity:1}.cold-season #weatherLander{filter:brightness(.7)}.dusty #weatherLander{filter:sepia(.85) brightness(.65)}
+ #instrument,#shield{opacity:0;transition:opacity .8s}.instrument-placed #instrument,.shield-placed #instrument,.shield-placed #shield{opacity:1}
+ #moleProbe{transition:transform .6s}.probe-grip #moleProbe{transform:translateY(28px)}.probe-slip #moleProbe{transform:translateY(-5px)}
+ .planet-layer-0{filter:drop-shadow(0 0 5px #C96948)}.planet-layer-1{filter:drop-shadow(0 0 5px #DB9A55)}.planet-layer-2{filter:drop-shadow(0 0 5px #F5CF79)}
+ @media(min-width:720px){#parts.on{grid-template-areas:"title title" "viewer controls" "viewer info" "next next";grid-template-rows:auto auto 1fr auto}#parts #r3{height:clamp(280px,calc(100dvh - 300px),500px)}#parts>.row:last-child{grid-area:next;margin:18px 0}}
+ @media(max-width:719px){#parts #r3{height:clamp(270px,48dvh,440px)}}
+ @media(prefers-reduced-motion:reduce){#digCover,#icePieces,#ovenWindow,#seasonOverlay,#instrument,#shield,#moleProbe{transition:none}}
+ 
+/* Match Phoenix's spacious, compact arrival page. */
+main:has(#arrival.on){padding-top:64px;padding-bottom:16px}
+#arrival h2{font-size:clamp(27px,4vw,36px);margin:4px 0 8px}
+#arrival>p{font-size:18px;line-height:1.4;margin:0 0 10px}
+#arrival .scene{width:min(100%,560px,max(140px,calc((100svh - 410px)*44/21)));margin:10px auto}
+#arrival #arrivalInfo{background:none;border:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;text-align:center;padding:0;margin:18px 0 0;font-size:17px;line-height:1.4}
+#arrival>.row{margin:24px 0 0}
+#arrival .btn{font-size:18px;padding:12px 28px}
+
+/* Center incomplete rows of favorite cards without stretching them. */
+#pick #picks{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+#pick #picks>.tile{flex:0 1 calc((100% - 20px)/3);min-width:0}
+@media(max-width:759px){#pick #picks>.tile{flex-basis:calc((100% - 10px)/2)}}
+
+
+/* A lunar horizon for Eagle’s story. */
+#ground{bottom:-12vh;height:25vh;border-radius:50% 50% 0 0;clip-path:none;background:radial-gradient(ellipse 5vw 1.5vh at 25% 30%,#777582 0 70%,#ABA6B1 75% 90%,transparent 95%),radial-gradient(ellipse 8vw 2vh at 74% 45%,#777582 0 70%,#ABA6B1 75% 90%,transparent 95%),linear-gradient(#B8B2BD,#7D798A);box-shadow:0 -2px 14px rgba(207,201,221,.16)}#dust{display:none}
+#descent .scene,#landing .scene,#walk .scene,#science .scene,#ascent .scene{max-width:600px;margin:12px auto}
+#landingCraft{transition:transform .9s}.landing-1 #landingCraft{transform:translateY(44px)}.landing-2 #landingCraft{transform:translateY(87px)}#landingPlume{transition:opacity .4s,transform .9s}.landing-1 #landingPlume{transform:translateY(44px)}.landing-2 #landingPlume{opacity:0}
+#walkerOne,#walkerTwo{opacity:0;transition:opacity .6s}.walk-1 #walkerOne,.walk-2 #walkerOne,.walk-2 #walkerTwo{opacity:1}
+#ascentCraft{transition:transform 1.4s ease-in-out}.ascent-1 #ascentCraft{transform:translateY(-45px)}.ascent-2 #ascentCraft{transform:translate(170px,-50px)}
+#safeSpot{transition:stroke .4s}.terrain-safe #safeSpot{stroke:#7CF0B8;stroke-width:5}#done .scene{max-width:350px;margin:12px auto}#done>.big{margin-top:12px}
+@media(prefers-reduced-motion:reduce){#landingCraft,#landingPlume,#walkerOne,#walkerTwo,#ascentCraft,#safeSpot{transition:none}}
+
+/* Compact Apollo story pages 4–7 without clipping their content. */
+main:has(:is(#descent,#landing,#walk,#science,#ascent).on){padding-top:64px;padding-bottom:16px}
+:is(#descent,#landing,#walk,#science,#ascent).on{display:flex;flex-direction:column;gap:12px}
+:is(#descent,#landing,#walk,#science,#ascent)>h2{font-size:clamp(26px,5.5vw,40px);margin:0}
+:is(#descent,#landing,#walk,#science,#ascent)>p{margin:0;font-size:18px;line-height:1.4}
+:is(#descent,#landing,#walk,#science,#ascent)>.scene{width:min(100%,600px,max(260px,calc((100svh - 370px)*44/21)));flex:none;margin:0 auto}
+:is(#descent,#landing,#walk,#science,#ascent)>.row{margin:0;gap:10px}
+:is(#descent,#landing,#walk,#science,#ascent)>.card{margin:0;padding:12px 18px;font-size:17px;line-height:1.4}
+:is(#descent,#landing,#walk,#science,#ascent) .btn{font-size:18px;padding:11px 28px}
+
+/* Match the second page to the roomier story-page sizing. */
+main:has(#arrival.on){padding-top:64px;padding-bottom:16px}
+#arrival.on{display:flex;flex-direction:column;gap:12px}
+#arrival>h2{font-size:clamp(26px,5.5vw,40px);margin:0}
+#arrival>p{margin:0;font-size:18px;line-height:1.4}
+#arrival>.scene{width:min(100%,600px,max(260px,calc((100svh - 370px)*44/21)));flex:none;margin:0 auto}
+#arrival #arrivalInfo{margin:0;padding:0;font-size:17px;line-height:1.4}
+#arrival>.row{margin:0;gap:10px}
+#arrival .btn{font-size:18px;padding:11px 28px}
+
+/* Match Sojourner’s larger second-page layout. */
+#arrival.on{display:block}
+main:has(#arrival.on){padding-top:64px;padding-bottom:16px}
+#arrival>h2{font-size:clamp(27px,4vw,36px);margin:4px 0 8px}
+#arrival>p{font-size:18px;line-height:1.4;margin:0 0 10px}
+#arrival>.scene{width:min(100%,660px,max(140px,calc((100svh - 340px)*44/21)));max-width:660px;margin:10px auto}
+#arrival #arrivalInfo{background:none;border:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;text-align:center;padding:0;margin:18px 0 0;font-size:17px;line-height:1.4}
+#arrival>.row{margin:24px 0 0}
+#arrival .btn{font-size:18px;padding:12px 28px}
+
+/* Give the second-page caption breathing room above the planet horizon. */
+.fit-second-page.on>.row:last-child{margin-top:28px!important}
+
+/* Match Spirit’s original final-page proportions and spacing. */
+main:has(#badge.on){max-width:800px;padding:74px 18px 30vh}
+#badge #cardBox{padding:0;margin:10px auto}
+#badge #tilt{width:min(300px,80vw)}
+#badge #bq{font-size:clamp(19px,3.4vw,24px);margin:0 0 14px}
+#badge #ba{font-size:18px;padding:16px 20px;margin:16px 0}
+
+/* Falcon’s short, roomy investigation pages. */
+main:has(:is(#landing,#rover,#geology,#experiments,#drop).on){padding-top:64px;padding-bottom:16px}
+:is(#landing,#rover,#geology,#experiments,#drop).on{display:flex;flex-direction:column;gap:12px}
+:is(#landing,#rover,#geology,#experiments,#drop)>h2,:is(#landing,#rover,#geology,#experiments,#drop)>p,:is(#landing,#rover,#geology,#experiments,#drop)>.row,:is(#landing,#rover,#geology,#experiments,#drop)>.card{margin:0}
+:is(#landing,#rover,#geology,#experiments,#drop)>p{font-size:18px;line-height:1.4}
+:is(#landing,#rover,#geology,#experiments,#drop)>.scene{width:min(100%,600px,max(260px,calc((100svh - var(--story-reserve,370px))*44/21)));flex:none;margin:0 auto}
+:is(#landing,#rover,#geology,#experiments,#drop)>.card{padding:12px 18px;font-size:17px;line-height:1.4}
+:is(#landing,#rover,#geology,#experiments,#drop) .btn{font-size:18px;padding:11px 28px}
+#drop{--story-reserve:430px}#falconLanding{transition:transform .9s}.falcon-land-1 #falconLanding{transform:translateY(44px)}.falcon-land-2 #falconLanding{transform:translateY(87px)}
+#roverDrive{transition:transform 1.5s ease-in-out;opacity:.35}.rover-ready #roverDrive{opacity:1}.rover-driving #roverDrive{opacity:1;transform:translateX(172px)}#roverTrail{opacity:0}.rover-driving #roverTrail{opacity:1}
+#rockSample{transition:filter .4s}.rock-1 #rockSample{filter:brightness(1.15)}.rock-2 #rockSample{filter:brightness(1.35)}
+#fallingHammer,#fallingFeather{transition:transform .9s cubic-bezier(.55,0,1,.45)}.objects-dropped #fallingHammer,.objects-dropped #fallingFeather{transform:translateY(94px)}
+@media(prefers-reduced-motion:reduce){#falconLanding,#roverDrive,#rockSample,#fallingHammer,#fallingFeather{transition:none}}
+
+/* Play again returns to the Cosmic Journey home page. */
+#again{display:inline-block;text-decoration:none;text-align:center}

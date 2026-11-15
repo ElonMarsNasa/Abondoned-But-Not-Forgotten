@@ -1,0 +1,8 @@
+/* Shared Home link stays visible alongside the mission progress bar. */
+#hud .mission-home{display:inline-flex;align-items:center;justify-content:center;gap:7px;flex:0 0 auto;padding:6px 12px;min-height:36px;border:1.5px solid #FFD16F;border-radius:12px;background:#FFFFFF19;color:#F6F1FF;text-decoration:none;font:600 15px Fredoka,"Trebuchet MS",sans-serif;line-height:1.4;transition:background .2s,box-shadow .2s;white-space:nowrap}
+#hud .mission-home svg{flex:none;display:block}
+#hud .mission-home:hover{background:#FFFFFF30;box-shadow:0 0 16px #FFD16F30}
+#hud .mission-home:focus-visible{outline:2px solid #FFE6A7;outline-offset:3px}
+#hud #trk{min-width:0;margin-right:6px}
+@media(max-width:420px){#hud{gap:8px;padding-inline:10px}#hud .mission-home{padding:6px 9px;gap:5px;font-size:13px}#hud b{font-size:11px;letter-spacing:2px}}
+@media(prefers-reduced-motion:reduce){#hud .mission-home{transition:none}}
